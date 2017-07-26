@@ -1,0 +1,22 @@
+<div class="container">
+  <!-- <div class="row">
+    <div class="" *ngIf="hasGame">
+      <h3>{{selectedGame.Id}} - {{selectedGame.Name}}</h3>
+      <br>
+      <label for="name">Description:</label>{{selectedGame.Description}}
+    </div>
+    <button (click)="goPrevious()" class="btn btn-primary">Previous</button>
+    <button (click)="goNext()" class="btn btn-primary">Next</button>
+    <br>
+    <button (click)="goGameList()" class="btn btn-primary">Back to List</button>
+  </div>
+  <hr> -->
+  <!-- <h3>Parent Component</h3>
+  <input type="text" name="" value="Parent" [(ngModel)]="parentValue">
+  <br><br>
+  <p>This value is from Child Component:</p><h4>{{childValue}}</h4>
+  <hr> -->
+  <div class="row" *ngIf="hasGame">
+    <app-game-detail-child [selectedGame]="selectedGame" (childEvent)="childEvent($event)"></app-game-detail-child>
+  </div>
+</div>

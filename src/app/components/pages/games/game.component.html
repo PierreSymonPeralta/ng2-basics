@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="jumbotron">
+		<h2>Games Module</h2>
+		<small>from PlaynGo API</small>
+	</div>
+
+	<div *ngIf="selectedId">
+		<label>Prev Selected:</label><h4>{{selectedId}}</h4>
+	</div>
+
+	<div *ngFor="let game of listOfGames" class="col-md-4">
+		<div class="well" (click)="onSelect(game)">
+			ID:{{game.Id}}
+			<h3>{{game.Name}}</h3>
+			<small>{{game.Description}}</small><br><br>
+			<button type="button" class="btn btn-primary">View Details >></button>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="jumbotron">
+    <h3>Users Module</h3>
+    <small>Http, Observables</small><br>
+    <small>from https://reqres.in</small>
+  </div>
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <router-outlet></router-outlet>
+</div>

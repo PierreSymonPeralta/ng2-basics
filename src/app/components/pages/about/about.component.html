@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="jumbotron">
+    <h3>Model Driven Form - Built from Form Builder</h3>
+  </div>
+  <div class="col-md-8 col-md-offset-2">
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value, myForm.valid)" class="well">
+        <!-- We'll add our form controls here -->
+        <!--name-->
+        <div>
+            <label>Name</label>
+            <input type="text" formControlName="name" class="form-control">
+        </div>
+    <!--payment method-->
+        <div>
+            <label>Payment Method</label>
+        </div>
+        <!--payment method type button-->
+        <div class="row">
+            <div class="col-xs-6">
+                <button type="button" (click)="setPaymentMethodType(PAYMENT_METHOD_TYPE.BANK)" class="btn btn-primary btn-payment-method">
+                {{ PAYMENT_METHOD_TYPE.BANK }}
+                </button>
+            </div>
+            <div class="col-xs-6">
+                <button type="button" (click)="setPaymentMethodType(PAYMENT_METHOD_TYPE.CARD)" class="btn btn-primary btn-payment-method">
+                {{ PAYMENT_METHOD_TYPE.CARD }}
+                </button>
+            </div>
+        </div>
+        <hr>
+        <div formGroupName="paymentMethod" class="panel panel-default">
+            <!--payment method: BANK-->
+            <div *ngIf="myForm.controls.paymentMethod.controls.type.value === PAYMENT_METHOD_TYPE.BANK">
+                <div class="panel-body">
+                    <!--Bank account no-->
+                    <div formGroupName="bank" class="form-group">
+                        <label>Account no.</label>
+                        <input type="text" formControlName="accountNo" class="form-control">
+                        <small *ngIf="!myForm.controls.paymentMethod.controls.bank.controls.accountNo.valid && !myForm.controls.paymentMethod.controls.bank.controls.accountNo.pristine">
+                        Required.
+                        </small>
+                    </div>
+
+                    <!--Bank routing no-->
+                    <div formGroupName="bank" class="form-group">
+                        <label>Routing no.</label>
+                        <input type="text" formControlName="routingNo" class="form-control">
+                        <small *ngIf="!myForm.controls.paymentMethod.controls.bank.controls.routingNo.valid && !myForm.controls.paymentMethod.controls.bank.controls.routingNo.pristine">
+                        Required.
+                        </small>
+                    </div>
+
+                    <!--Bank account holder-->
+                    <div formGroupName="bank"  class="form-group">
+                        <label>Name</label>
+                        <input type="text" formControlName="accountHolder" class="form-control">
+                        <small *ngIf="!myForm.controls.paymentMethod.controls.bank.controls.accountHolder.valid && !myForm.controls.paymentMethod.controls.bank.controls.accountHolder.pristine">
+                        Required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <!--payment method: CARD-->
+            <div  *ngIf="myForm.controls.paymentMethod.controls.type.value === PAYMENT_METHOD_TYPE.CARD">
+                <div class="panel-body">
+
+                    <!--Card no-->
+                    <div formGroupName="card"  class="form-group">
+                        <label>Card no.</label>
+                        <input type="text" formControlName="cardNo" class="form-control">
+                        <small *ngIf="!myForm.controls.paymentMethod.controls.card.controls.cardNo.valid && !myForm.controls.paymentMethod.controls.card.controls.cardNo.pristine">
+                        Required (Must be valid card number).
+                        </small>
+                    </div>
+
+                    <!--Card expiry-->
+                    <div formGroupName="card"  class="form-group">
+                        <label>Expiry</label>
+                        <input type="text" formControlName="expiry" class="form-control">
+                        <small *ngIf="!myForm.controls.paymentMethod.controls.card.controls.expiry.valid && !myForm.controls.paymentMethod.controls.card.controls.expiry.pristine"
+                        class="text-danger">
+                        Required (Must be in format MM/YY).
+                        </small>
+                    </div>
+
+                    <!--Card holder-->
+                    <div formGroupName="card"  class="form-group" >
+                        <label>Name</label>
+                        <input type="text" formControlName="cardHolder" class="form-control">
+                        <small *ngIf="!myForm.controls.paymentMethod.controls.card.controls.cardHolder.valid && !myForm.controls.paymentMethod.controls.card.controls.cardHolder.pristine">
+                        Required.
+                        </small>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" [disabled]="!myForm.valid" class="btn btn-success">Submit</button>
+            <button type="button" class="btn btn-primary" (click)="gotoUsers()">Goto Users</button>
+        </div>
+
+    </form>
+  </div>
+</div>

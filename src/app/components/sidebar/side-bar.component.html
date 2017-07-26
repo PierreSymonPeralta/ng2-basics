@@ -1,0 +1,18 @@
+<div class="side-bar">
+	<p>Value from parent compinent:{{user}}</p>
+	<input type="text" name="name" [(ngModel)]="childValue" (keyup)="onChange(childValue)">
+	<br><br>
+	<div class="row">
+		<form>
+			<div class="col-md-5">
+				<input type="text" name="name" [(ngModel)]="newName">
+			</div>
+			<div class="col-md-6"><button class="btn btn-primary" (click)="addNew(newName)">Add</button></div>
+		</form>
+	</div>
+	<ul>
+		<li *ngFor="let name of names" (click)="onSelect(name)">
+			<span></span>{{name.name}}			
+		</li>
+	</ul>	
+</div>

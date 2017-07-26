@@ -1,0 +1,23 @@
+{
+  "BackDrop":"/images/backdrops/backdrop_WM.jpg",
+  "Description":"3 Reel Slot Machine",
+  "Enabled": true,
+  "GameRegulators":[
+      { "Regulator":"aams"}
+  ],
+  "GameTags": [
+    {
+      "DisplayName":"All",
+      "Tag":"premium"
+    }
+  ],
+  "Gid":"wildmelon",
+  "Id":4,
+  "Name":"Wild Melon",
+  "PreviewImg":"100004",
+  "RTP":93.72,
+  "ReleaseDate":"2014-03-25T00:00:00",
+  "Summary":"<p>Melons are wild and substitute for any other reel symbol when they appear anywhere on the reels, even when a melon lands above or below the payline. </p>",
+  "Type":"flash",
+  "YoutubeId":null
+}

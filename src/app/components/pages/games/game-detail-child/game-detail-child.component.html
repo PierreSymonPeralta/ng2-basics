@@ -1,0 +1,108 @@
+<div class="row">
+  <br><br>
+  <div class="col-md-6">
+    <h2>Template Driven Form</h2>
+    <form class="well" #gameTemplateForm="ngForm" (ngSubmit)="onSubmitTemplateBased(gameForm.value)" novalidate>
+      <h3>Game Details</h3>
+      <hr>
+      <div class="form-group">
+        <label for="text">Name:</label>
+        <input type="text" class="form-control" name="Name" ngModel #nameRef="ngModel" required minlength="5" maxlength="10" [ngModel]="selectedGame.Name">
+      </div>
+      <div *ngIf="nameRef.invalid && (nameRef.touched || nameRef.dirty)" class="alert alert-danger">
+          <p *ngIf="nameRef.errors.minlength">Please enter at least 5 character</p>
+          <p *ngIf="nameRef.errors.required">Please enter a name</p>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control" name="Description" [ngModel]="selectedGame.Description">
+      </div>
+      <div class="form-group">
+        <label for="release-date">ReleaseDate:</label>
+        <input type="text" class="form-control" name="ReleaseDate" [ngModel]="selectedGame.ReleaseDate">
+      </div>
+      <div class="form-group">
+        <label for="type">Type:</label>
+        <select class="form-control" name="type" [ngModel]="selectedGame.Type">
+          <option *ngFor="let type of gameTypes" [value]="type">{{type}}</option>
+        </select>
+      </div>
+      <div ngModelGroup="other">
+        <div class="form-group">
+          <label for="RTP">RTP:</label>
+            <input type="text" class="form-control" name="RTP" [ngModel]="selectedGame.RTP">
+        </div>
+        <div class="form-group">
+          <label for="Gid">Gid:</label>
+            <input type="text" class="form-control" name="Gid" [ngModel]="selectedGame.Gid">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="summary">Summary:</label>
+        <textarea name="summary" rows="8" cols="80" class="form-control" name="Summary" [ngModel]="selectedGame.Summary"></textarea>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" name="Enabled" [ngModel]="selectedGame.Enabled"> Enabled</label>
+      </div>
+      <button type="submit" [disabled]="gameTemplateForm.form.invalid" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+
+
+
+  <div class="col-md-6">
+    <h2>Reactive Driven Form</h2>
+    <form class="well"  [formGroup]="gameForm" (ngSubmit)="onSubmitModelBased()">
+      <h3>Game Details</h3>
+      <hr>
+      <div class="form-group">
+        <label for="text">Name:</label>
+        <input type="text" class="form-control" formControlName="Name">
+      </div>
+      <div *ngIf="gameForm.controls['Name'].hasError('required')" class="alert alert-danger">
+        <p>Please enter a name</p>
+      </div>
+      <div *ngIf="gameForm.controls['Name'].hasError('minlength')" class="alert alert-danger">
+        <p>Please enter at least 5 character</p>
+      </div>
+      <div *ngIf="gameForm.controls['Name'].hasError('maxlength')" class="alert alert-danger">
+        <p>Please do not exceed up to 10 character</p>
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control" formControlName="Description">
+      </div>
+      <div class="form-group">
+        <label for="release-date">ReleaseDate:</label>
+        <input type="text" class="form-control" formControlName="ReleaseDate">
+      </div>
+      <div class="form-group">
+        <label for="type">Type:</label>
+        <select class="form-control"  formControlName="Type">
+          <option *ngFor="let type of gameTypes" [value]="type">{{type}}</option>
+        </select>
+      </div>
+      <div formGroupName="other">
+          <div class="form-group">
+            <label for="RTP">RTP:</label>
+              <input type="text" class="form-control" formControlName="RTP">
+          </div>
+          <div class="form-group">
+            <label for="Gid">Gid:</label>
+              <input type="text" class="form-control" formControlName="Gid">
+          </div>
+          <div *ngIf="gameForm.controls['other'].controls['Gid'].hasError('required')" class="alert alert-danger">
+            <p>Please enter the Gid</p>
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="summary">Summary:</label>
+        <textarea  formControlName="Summary" rows="8" cols="80" class="form-control"></textarea>
+      </div>
+      <div class="checkbox">
+        <label><input type="checkbox" formControlName="Enabled"> Enabled</label>
+      </div>
+      <button type="submit" [disabled]="gameForm.invalid" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+</div>
